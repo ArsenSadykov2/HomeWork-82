@@ -21,7 +21,6 @@ albumRouter.post('/', imagesUpload.single('image'), async (req, res, next) => {
         const artist = req.body.artist;
         const title = req.body.title;
         const date = req.body.date;
-        const image = req.body.image;
 
         const artistId = await Artist.findById(artist);
         if(!artistId) {
