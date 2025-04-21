@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 import express from "express";
 import cors from "cors";
-import artistRouter from "./routers/artist";
-import albumsRouter from "./routers/album";
-import trackRouter from "./routers/track";
+import artistRouter from "./routers/artists";
+import albumsRouter from "./routers/albums";
+import trackRouter from "./routers/tracks";
 import usersRouter from "./routers/users";
+import trackHistoryRouter from "./routers/trackHistorys";
 
 const app = express();
 const port = 8000;
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use(express.json());
 app.use('/users', usersRouter);
+app.use('/trackHistories', trackHistoryRouter);
 app.use('/artists', artistRouter);
 app.use('/albums', albumsRouter);
 app.use('/tracks', trackRouter);

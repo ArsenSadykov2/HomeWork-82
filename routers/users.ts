@@ -11,7 +11,6 @@ usersRouter.post('/', async (req, res, next) => {
             username: req.body.username,
             password: req.body.password,
         });
-
         user.generateToken();
         await user.save();
         res.send(user);
@@ -51,25 +50,25 @@ usersRouter.post('/sessions', async (req, res, next) => {
     res.send({message: "Username and password is correct", user});
 });
 
-usersRouter.post('/secret', async (req, res, next) => {
-    const token = req.get('Authorization');
-
-    if(!token) {
-        res.status(400).send({error: 'Invalid token'});
-        return;
-    }
-
-    const user = await User.findOne({token: token});
-
-    if(!user) {
-        res.status(401).send({error: 'Invalid token'});
-        return;
-    }
-
-    res.send({
-        message: 'Secret message',
-        user: user.username,
-    })
-});
+// usersRouter.post('/secret', async (req, res, next) => {
+//     const token = req.get('Authorization');
+//
+//     if(!token) {
+//         res.status(400).send({error: 'Invalid token'});
+//         return;
+//     }
+//
+//     const user = await User.findOne({token: token});
+//
+//     if(!user) {
+//         res.status(401).send({error: 'Invalid token'});
+//         return;
+//     }
+//
+//     res.send({
+//         message: 'Secret message',
+//         user: user.username,
+//     })
+// });
 
 export default usersRouter;
