@@ -15,7 +15,7 @@ trackHistoryRouter.post('/', async (req, res, next) => {
             return;
         }
 
-        const user = await User.findOne({ token });
+        const user = await User.findOne({token: token });
         if (!user) {
             res.status(401).send({ error: 'User not found' });
             return;
@@ -27,7 +27,7 @@ trackHistoryRouter.post('/', async (req, res, next) => {
             return;
         }
 
-        const track = await Track.findById(trackId);
+        const track = await Track.findById({_id: trackId});
         if (!track) {
             res.status(404).send({ error: 'Track not found' });
             return;
@@ -36,6 +36,7 @@ trackHistoryRouter.post('/', async (req, res, next) => {
         const trackHistory = new TrackHistory({
             user: user._id,
             track: track._id,
+            token: token,
             dateTime: new Date()
         });
 

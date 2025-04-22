@@ -35,6 +35,13 @@ const TrackHistorySchema = new mongoose.Schema<
     }
 });
 
+TrackHistorySchema.pre('save', function(next) {
+    if (!this.token) {
+        this.token = randomUUID();
+    }
+    next();
+});
+
 TrackHistorySchema.methods.generateToken = function () {
     this.token = randomUUID();
 }
